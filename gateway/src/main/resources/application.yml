@@ -1,0 +1,20 @@
+server:
+  port: 9000
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: http://${EUREKA_HOST:localhost}:8761/eureka/
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+      - id: issue568-micronaut
+        uri: lb://issue568-micronaut
+        predicates:
+        - Path=/**
