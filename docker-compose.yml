@@ -11,6 +11,14 @@ services:
       - "8761:8761"
     networks:
       - issue568
+  issue568-gateway:
+    image: issue568-gateway:0.1
+    environment:
+      - EUREKA_HOST=issue568-eureka
+    ports:
+      - "9000:9000"
+    networks:
+      - issue568
   issue568-micronaut:
     image: issue568-micronaut:0.1
     environment:
@@ -18,7 +26,7 @@ services:
       - MICRONAUT_SERVER_HOST=issue568-micronaut
     depends_on:
       - issue568-eureka
-    ports:
-      - "8080:8080"
+#    ports:
+#      - "8080:8080"
     networks:
       - issue568

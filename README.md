@@ -2,7 +2,8 @@
 
 1. cd eureka && ./gradlew docker
 2. cd micronaut && ./gradlew docker
-3. docker-compose up
+3. cd gateway && ./gradlew docker
+4. docker-compose up
 
 Eureka starts but Micronaut service shuts down because it cannot connect to Eureka.
 
@@ -31,3 +32,6 @@ eureka:
         defaultZone: "${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}"
 ```
 
+# NEXT problem!
+
+Spring Cloud Gateway used UPPERCASE hostname when connecting to hosts discovered by Eureka
