@@ -8,4 +8,7 @@ eureka:
     client:
         registration:
             enabled: true
+            fail-fast: false
+            retry-count: 8
+            retry-delay: 5s
         defaultZone: "${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}"

@@ -13,3 +13,21 @@ Wait 30 seconds then do:
 Micronaut will now register with Eureka.
 
 
+## RTFM
+
+Micronaut already support configurable retries!
+It's documented in the [Consul section](https://docs.micronaut.io/latest/guide/index.html#_customizing_consul_service_registration) of the user guide.
+
+With the following configuration in the Micronaut service it will successfully register with Eureka after 20-30 seconds.
+
+```
+eureka:
+    client:
+        registration:
+            enabled: true
+            fail-fast: false
+            retry-count: 10
+            retry-delay: 5s
+        defaultZone: "${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}"
+```
+
