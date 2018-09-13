@@ -15,6 +15,7 @@ services:
     image: issue568-micronaut:0.1
     environment:
       - EUREKA_HOST=issue568-eureka
+      - MICRONAUT_SERVER_HOST=issue568-micronaut
     depends_on:
       - issue568-eureka
     ports:
