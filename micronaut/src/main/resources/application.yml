@@ -1,0 +1,11 @@
+micronaut:
+    application:
+        name: issue568-micronaut
+    server:
+        port: 8080
+
+eureka:
+    client:
+        registration:
+            enabled: true
+        defaultZone: "${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}"

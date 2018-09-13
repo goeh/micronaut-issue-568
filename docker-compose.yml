@@ -1,0 +1,23 @@
+version: "3"
+
+networks:
+  issue568:
+    driver: bridge
+
+services:
+  issue568-eureka:
+    image: issue568-eureka:0.1
+    ports:
+      - "8761:8761"
+    networks:
+      - issue568
+  issue568-micronaut:
+    image: issue568-micronaut:0.1
+    environment:
+      - EUREKA_HOST=issue568-eureka
+    depends_on:
+      - issue568-eureka
+    ports:
+      - "8080:8080"
+    networks:
+      - issue568

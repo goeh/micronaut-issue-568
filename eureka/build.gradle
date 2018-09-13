@@ -1,0 +1,63 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.4.RELEASE'
+		springCloudVersion = 'Finchley.SR1'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'issue568'
+version = '0.1'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-server')
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+task docker(dependsOn: build) {
+	def dockerStageDir = new File(project.buildDir, "docker")
+	def tagName = version
+	def jarName = "${project.name}-${version}.jar"
+	doLast {
+		copy {
+			from jar
+			into dockerStageDir
+		}
+
+		def buildFile = new File(dockerStageDir, "Dockerfile")
+		buildFile.text = """\
+FROM openjdk:8-jre-slim
+ADD ${jarName} ${jarName}
+RUN sh -c 'touch /${jarName}'
+VOLUME ["/tmp"]
+ENTRYPOINT ["sh", "-c", "exec java -jar \$JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -Xms128m -Xmx128m /${jarName}"]
+        
+EXPOSE 8761
+"""
+
+		exec {
+			workingDir = dockerStageDir
+			commandLine 'docker', 'build', '-t', "${project.name}:${tagName}", '.'
+		}
+	}
+}

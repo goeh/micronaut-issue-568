@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: issue568
+---
+testFramework: junit
+sourceLanguage: java
