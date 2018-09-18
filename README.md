@@ -66,6 +66,20 @@ issue568-gateway_1    | 	at io.netty.util.internal.SocketUtils.addressByName(Soc
 
 # ResourceLeakDetector issue
 
+I hijacked this project to reproduce a leak issue https://github.com/micronaut-projects/micronaut-core/issues/573#issuecomment-421910729
+
+First I could not reproduce the issue but once I added **Kafka** to the project, `ResourceLeakDetector` messages started to appear.
+
+## Steps to reproduce
+
+```
+./gradlew docker
+docker-compose up
+curl -X POST http://localhost:9000/
+```
+
+Wait ~10 minutes, then the following message will be written to the log.
+
 ```
   | 07:35:34.162 [nioEventLoopGroup-1-7] ERROR io.netty.util.ResourceLeakDetector - LEAK: ByteBuf.release() was not called before it's garbage-collected. See http://netty.io/wiki/reference-counted-objects.html for more information.
   | Recent access records: 
@@ -104,11 +118,4 @@ issue568-gateway_1    | 	at io.netty.util.internal.SocketUtils.addressByName(Soc
   | 	io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:884)
   | 	io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
   | 	java.lang.Thread.run(Thread.java:748)
-
-```
-
-```
-./gradlew docker
-docker-compose up
-curl -X POST http://localhost:9000/
 ```
