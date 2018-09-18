@@ -75,6 +75,7 @@ First I could not reproduce the issue but once I added **Kafka** to the project,
 ```
 ./gradlew docker
 docker-compose up
+# Wait 30 seconds for the service to register with Eureka.
 curl -X POST http://localhost:9000/
 ```
 
