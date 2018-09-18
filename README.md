@@ -75,11 +75,9 @@ First I could not reproduce the issue but once I added **Kafka** to the project,
 ```
 ./gradlew docker
 docker-compose up
-# Wait 30 seconds for the service to register with Eureka.
-curl -X POST http://localhost:9000/
 ```
 
-Wait ~10 minutes, then the following message will be written to the log.
+Wait 10-20 minutes, then the following message will be written to the log.
 
 ```
   | 07:35:34.162 [nioEventLoopGroup-1-7] ERROR io.netty.util.ResourceLeakDetector - LEAK: ByteBuf.release() was not called before it's garbage-collected. See http://netty.io/wiki/reference-counted-objects.html for more information.
