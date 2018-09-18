@@ -1,4 +1,4 @@
-# Test project to reproduce Micronaut issue [568](https://github.com/micronaut-projects/micronaut-core/issues/568)
+# Test project to reproduce Micronaut issue [568](https://github.com/micronaut-projects/micronaut-core/issues/568) and [573](https://github.com/micronaut-projects/micronaut-core/issues/573)
 
 1. ./gradlew docker
 2. docker-compose up
@@ -64,7 +64,7 @@ issue568-gateway_1    | 	at java.security.AccessController.doPrivileged(Native M
 issue568-gateway_1    | 	at io.netty.util.internal.SocketUtils.addressByName(SocketUtils.java:143) ~[netty-common-4.1.29.Final.jar!/:4.1.29.Final]
 ```
 
-# ResourceLeakDetector issue
+# ResourceLeakDetector issue #[573](https://github.com/micronaut-projects/micronaut-core/issues/573)
 
 I hijacked this project to reproduce a leak issue https://github.com/micronaut-projects/micronaut-core/issues/573#issuecomment-421910729
 
