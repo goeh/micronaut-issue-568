@@ -18,7 +18,7 @@ public class HelloController {
     @Get
     @Produces(MediaType.TEXT_PLAIN)
     public String index() {
-        return "Hello World";
+        return "Hello World\n";
     }
 
 
@@ -26,6 +26,13 @@ public class HelloController {
     @Produces(MediaType.TEXT_PLAIN)
     public String send() {
         kafkaClient.send(String.valueOf(System.currentTimeMillis()), "568", "Hello World!");
-        return "\"Hello World!\" sent to Kafka topic 'notifications'";
+        return "\"Hello World!\" sent to Kafka topic 'notifications'\n";
+    }
+
+    @Post("/gc")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String gc() {
+        System.gc();
+        return "Garbage collection initiated\n";
     }
 }
