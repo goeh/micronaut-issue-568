@@ -21,7 +21,7 @@ version = buildNumber()
 
 
 //version "0.1"
-group "issue568"
+group "issue"
 
 apply plugin:"io.spring.dependency-management"
 apply plugin:"com.github.johnrengelman.shadow"
@@ -49,7 +49,9 @@ dependencies {
     compile "io.micronaut:runtime"
     compile "io.micronaut:http-client"
     compile "io.micronaut:http-server-netty"
+    compile "io.micronaut.configuration:kafka"
     compileOnly "io.micronaut:inject-java"
+    runtime "org.hibernate.validator:hibernate-validator:6.0.13.Final"
     runtime "io.micronaut:discovery-client"
     runtime "ch.qos.logback:logback-classic:1.2.3"
     testCompile "junit:junit:4.12"
@@ -62,7 +64,7 @@ shadowJar {
 
 run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1')
 
-mainClassName = "issue568.Application"
+mainClassName = "issue.Application"
 compileJava.options.compilerArgs += '-parameters'
 compileTestJava.options.compilerArgs += '-parameters'
 

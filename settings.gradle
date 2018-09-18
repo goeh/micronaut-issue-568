@@ -1,0 +1,3 @@
+rootProject.name = 'issue568'
+
+include 'eureka', 'gateway', 'micronaut'

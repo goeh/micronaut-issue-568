@@ -12,3 +12,7 @@ eureka:
             retry-count: 8
             retry-delay: 5s
         defaultZone: "${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}"
+
+kafka:
+    bootstrap:
+        servers: kafka:9092

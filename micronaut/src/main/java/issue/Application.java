@@ -1,4 +1,4 @@
-package issue568;
+package issue;
 
 import io.micronaut.runtime.Micronaut;
 
